@@ -14,6 +14,8 @@ AUTHKEY = os.getenv("AUTHKEY")
 smite = SmiteAPI(DEVID, AUTHKEY)
 smiteStatus = StatusPageAPI()
 
+# Player functions
+
 
 def getPlayer(name):
     while True:
@@ -24,8 +26,18 @@ def getPlayer(name):
             break
 
         print(name.activePlayerId)
-        print(name)
+        getGodStats(name.activePlayerId,  'Ares')
         break
+
+
+def getGodStats(userId, userGod):
+    godStats = smite.getGodRanks(userId)
+
+    for key in godStats:
+        if key.god == userGod:
+            thisGod = key
+            print(thisGod)
+# Status and Server Functions
 
 
 def patchVersion():
@@ -67,3 +79,4 @@ def Incidents():
 
 
 Incidents()
+getPlayer('Rexsi')
