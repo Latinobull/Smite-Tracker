@@ -4,6 +4,7 @@ import os
 
 import pyrez
 from pyrez.api.StatusPageAPI import StatusPageAPI
+from requests.models import to_native_string
 
 load_dotenv()
 
@@ -15,6 +16,7 @@ smite = SmiteAPI(DEVID, AUTHKEY)
 smiteStatus = StatusPageAPI()
 
 # Player functions
+msg = "An error has occured"
 
 
 def getPlayer(name):
@@ -26,7 +28,7 @@ def getPlayer(name):
             break
 
         print(name.activePlayerId)
-        getGodStats(name.activePlayerId,  'Ares')
+        getGodStats(name.activePlayerId,  'Aresreg')
         break
 
 
@@ -34,9 +36,12 @@ def getGodStats(userId, userGod):
     godStats = smite.getGodRanks(userId)
 
     for key in godStats:
+        global thisGod
         if key.god == userGod:
             thisGod = key
-            print(thisGod)
+        else:
+            thisGod = msg
+        print(thisGod)
 # Status and Server Functions
 
 
